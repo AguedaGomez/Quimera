@@ -14,15 +14,13 @@ public class CameraFollow : MonoBehaviour
         offset = transform.position - target.position;
     }
 
-    void LateUpdate()
+    void FixedUpdate()
     {
-        float currentAngle = transform.eulerAngles.y;
-        float desiredAngle = target.eulerAngles.y;
-        float angle = Mathf.LerpAngle(currentAngle, desiredAngle, Time.deltaTime * smoothing);
+        // Create a postion the camera is aiming for based on the offset from the target.
+        Vector3 targetCamPos = target.position + offset;
 
-        Quaternion rotation = Quaternion.Euler(0, angle, 0);
-        transform.position = target.position - (rotation * offset);
-
-        transform.LookAt(target.transform);
+        // Smoothly interpolate between the camera's current position and it's target position.
+        transform.position = Vector3.Lerp(transform.position, targetCamPos, smoothing * Time.deltaTime);
+        transform.rotation = Quaternion.LookRotation(target.position-transform.position);
     }
 }
