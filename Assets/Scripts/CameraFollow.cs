@@ -21,8 +21,12 @@ public class CameraFollow : MonoBehaviour
 
         // Smoothly interpolate between the camera's current position and it's target position.
         transform.position = Vector3.Lerp(transform.position, targetCamPos, smoothing * Time.deltaTime);
-        Vector3 direction = (target.position - transform.position).normalized;
+
+        //Debug.Log("TEST: playerRotation = " + target.rotation.y);
+
+       /* Vector3 direction = (target.position - transform.position).normalized;
         Quaternion lookRotation = Quaternion.LookRotation(direction);
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * smoothing);
+        */
     }
 }

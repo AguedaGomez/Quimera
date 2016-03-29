@@ -98,6 +98,7 @@ GameObject:
   - 124: {fileID: 647534912}
   - 81: {fileID: 647534911}
   - 114: {fileID: 647534916}
+  - 114: {fileID: 647534917}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -144,7 +145,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 70
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -173,6 +174,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!114 &647534916
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 647534910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7232962877fd4fe4892a8892012b3293, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rootNode: {fileID: 0}
+  carCam: {fileID: 0}
+  car: {fileID: 0}
+  carPhysics: {fileID: 0}
+  rotationThreshold: 1
+  cameraStickiness: 10
+  cameraRotationSpeed: 5
+--- !u!114 &647534917
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -273,7 +292,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: 0f8469c32cccb7244bc9c31f7f205066, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: 0f8469c32cccb7244bc9c31f7f205066, type: 3}
       propertyPath: m_LocalPosition.z
@@ -281,19 +300,19 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: 0f8469c32cccb7244bc9c31f7f205066, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 8.658012e-17
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: 0f8469c32cccb7244bc9c31f7f205066, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.7203516
+      value: 0.7091039
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: 0f8469c32cccb7244bc9c31f7f205066, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -8.658012e-17
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: 0f8469c32cccb7244bc9c31f7f205066, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.6936091
+      value: -0.7051041
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: 0f8469c32cccb7244bc9c31f7f205066, type: 3}
       propertyPath: m_RootOrder
@@ -359,7 +378,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 68
+  m_Constraints: 100
   m_CollisionDetection: 0
 --- !u!114 &1642378977
 MonoBehaviour:

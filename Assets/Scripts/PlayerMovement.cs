@@ -106,7 +106,7 @@ public class PlayerMovement : MonoBehaviour {
         Vector3 movement = transform.forward * m_MovementInputValue * m_Speed * Time.deltaTime;
 
         // Apply this movement to the rigidbody's position.
-        m_Rigidbody.MovePosition(m_Rigidbody.position + movement);
+        m_Rigidbody.MovePosition(m_Rigidbody.position - movement);
     }
 
 
@@ -115,6 +115,9 @@ public class PlayerMovement : MonoBehaviour {
         // Determine the number of degrees to be turned based on the input, speed and time between frames.
         float turn = m_TurnInputValue * m_TurnSpeed * Time.deltaTime;
 
+        Debug.Log("TEST: turninputvalue = " + m_TurnInputValue);
+
+        transform.Rotate(0, 0, m_TurnInputValue);
         // Make this into a rotation in the y axis.
         Quaternion turnRotation = Quaternion.Euler(0f, turn, 0f);
 
