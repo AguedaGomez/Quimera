@@ -180,11 +180,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 647534910}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d41d35b61ca5d5d489ca01bb1c94d678, type: 3}
+  m_Script: {fileID: 11500000, guid: 721a9ba90b77f9b42a809578a191d0a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 1642378978}
-  smoothing: 5
 --- !u!1 &1060568837
 GameObject:
   m_ObjectHideFlags: 0
