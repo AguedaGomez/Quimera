@@ -6,7 +6,7 @@ public class PlayerMovement : MonoBehaviour {
     public float m_Speed = 30f;                 // How fast the tank moves forward and back.
     public float m_TurnSpeed = 180f;            // How fast the tank turns in degrees per second.
 
-
+    private float fuel = 100f;
     private string m_MovementAxisName;          // The name of the input axis for moving forward and back.
     private string m_TurnAxisName;              // The name of the input axis for turning.
     private Rigidbody m_Rigidbody;              // Reference used to move the tank.
@@ -52,7 +52,20 @@ public class PlayerMovement : MonoBehaviour {
         // Store the value of both input axes.
         m_MovementInputValue = Input.GetAxis(m_MovementAxisName);
         m_TurnInputValue = Input.GetAxis(m_TurnAxisName);
+<<<<<<< HEAD
         //Debug.Log("TEST: turninputvalue = " + m_TurnInputValue);
+=======
+
+        // If space is held down and ship has fuel 
+        if (Input.GetButton("Fire1") && fuel > 0 )
+        {
+            m_Rigidbody.AddForce(-transform.forward * 20);
+            fuel -= 0.5f;
+            Debug.Log(fuel);
+
+        }
+            
+>>>>>>> b30a7d013cef5a0064c7e9fc332387fa1a39879e
     }
 
 
