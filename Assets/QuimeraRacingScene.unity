@@ -268,6 +268,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a307381083ad6ca4e96136de2bbc5ea0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &811853634
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 811853627}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e321d5f91201f8429d3ae711f574ef8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1060568837
 GameObject:
   m_ObjectHideFlags: 0
@@ -385,6 +396,10 @@ Prefab:
     - target: {fileID: 100006, guid: 0f8469c32cccb7244bc9c31f7f205066, type: 3}
       propertyPath: m_Layer
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 100006, guid: 0f8469c32cccb7244bc9c31f7f205066, type: 3}
+      propertyPath: m_TagString
+      value: SpaceShip
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0f8469c32cccb7244bc9c31f7f205066, type: 3}
