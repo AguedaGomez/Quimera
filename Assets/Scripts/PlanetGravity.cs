@@ -24,7 +24,7 @@ public class PlanetGravity : MonoBehaviour {
         {
             PlanetGravitation(shipsBodies[0], distancePlanetShip);
         }
-        Debug.Log("TEST: distancia = " + distancePlanetShip);
+        //Debug.Log("TEST: distancia = " + distancePlanetShip);
 
 
     }
@@ -35,11 +35,20 @@ public class PlanetGravity : MonoBehaviour {
         //shipsBodies[0].MovePosition(Vector3.MoveTowards(shipsBodies[0].position, planetRigidBody.position, 0.0005f)); // demasiado rápido e incontrolable
 
         //ship.MovePosition(ship.position - ((ship.position - planetRigidBody.position ) / (1/ distance ) )); // igual que el primero
-        Vector3 direction = planetRigidBody.position - ship.position;
-        ship.AddForce(direction.normalized * 1000/distance);
 
-        Vector3 orbitation = Vector3.Cross(direction.normalized, Vector3.up);
-        ship.AddForce(orbitation * 70/distance);
+        Vector3 direction = planetRigidBody.position - ship.position;
+        //ship.AddForce(direction.normalized * 300/distance);
+
+        //Vector3 orbitation = Vector3.Cross(direction.normalized, Vector3.up);
+        //ship.AddForce(orbitation * 100/distance);
+
+        //Debug.Log("FuerzaG: " + (direction.normalized * 300 / distance) + "FuerzaRotacion: " + (orbitation * 100 / distance));
+
+        float Gm1m2 = 100 * (UnityEngine.Random.value + 0.1f);
+        float Fg = Gm1m2 / (distance * distance);
+
+        Vector3 directionFg = direction * Fg;
+        ship.velocity += directionFg;
 
     }
 
