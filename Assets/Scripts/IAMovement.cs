@@ -26,15 +26,18 @@ public class IAMovement : MonoBehaviour {
 
 	}
 
-    public void nextWaypoint() {
-
-        if (waypoint.name == "WayPoint16")
+    public void nextWaypoint(string WP) {
+        if (WP == waypoint.name)
         {
-            waypoint = GameObject.Find("WayPoint00");
-        }
-        else {
-            waypoint = GameObject.Find(nextWP(waypoint.name));
-            Debug.Log("Yendo a " + waypoint.name);
+            if (waypoint.name == "WayPoint16")
+            {
+                waypoint = GameObject.Find("WayPoint00");
+            }
+            else
+            {
+                waypoint = GameObject.Find(nextWP(waypoint.name));
+                Debug.Log("Yendo a " + waypoint.name);
+            }
         }
     }
 

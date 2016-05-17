@@ -12,7 +12,7 @@ public class WaypointScrpit : MonoBehaviour {
         if (ship.gameObject.GetComponent<IAMovement>() != null) //para evitar el null reference error
         {
             IAShip = ship.gameObject.GetComponent<IAMovement>();
-            IAShip.nextWaypoint();
+            IAShip.nextWaypoint(this.gameObject.name);
         }
 
     }
