@@ -15,7 +15,6 @@ GameObject:
   - 195: {fileID: 19526278}
   - 65: {fileID: 6549654}
   - 114: {fileID: 11487104}
-  - 114: {fileID: 11462314}
   m_Layer: 8
   m_Name: Bot_IA
   m_TagString: SpaceShip
@@ -198,22 +197,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &11462314
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 106726}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e435ea1686f1934b9428029258a5e32, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SpawnPoint: {fileID: 0}
-  ShipColor: {r: 0, g: 0, b: 0, a: 0}
-  ShipNumber: 0
-  m_ColoredPlayerText: 
-  m_Instance: {fileID: 0}
 --- !u!114 &11487104
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -225,21 +208,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 271d7eb1f319e8040a00d2eaa1034fa2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: {x: 0, y: 0, z: 0}
 --- !u!195 &19526278
 NavMeshAgent:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 106726}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: 3.9340007
   m_Speed: 180
   m_Acceleration: 20
   avoidancePriority: 50
   m_AngularSpeed: 20
-  m_StoppingDistance: 10
+  m_StoppingDistance: 100
   m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 0
+  m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 3
   m_BaseOffset: 1
@@ -251,7 +235,11 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 106726}

@@ -40,7 +40,12 @@ public class GameManager : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update () {
-	
-	}
+    void Update()
+    {
+
+        for (int i = 0; i < spaceships.Length - 1; i++) // el menos uno es para erservar el ultimo espacio para el jugador
+        {
+            spaceships[i].UpdateCrashOrOut();
+        }
+    }
 }

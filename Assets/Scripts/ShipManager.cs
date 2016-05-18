@@ -38,18 +38,23 @@ public class ShipManager  {
             // ... set their material color to the color specific to this tank.
             renderers[i].material.color = ShipColor;
         }
+
+        //Debug.Log("TEST: Se ejecuta el SETUP del shipManager");
+
     }
-
-
-
-
+    
     // Update is called once per frame
-    void FixedUpdate()
+    public void UpdateCrashOrOut()
     {
+        shipTransform = m_Instance.transform;
         //Raycast hacia el suelo para ver si te sales de la pista.
-        if (!Physics.Raycast(shipTransform.position, Vector3.down, out trackHit, 10))
+        bool RayHitsGround = Physics.Raycast(shipTransform.position, shipTransform.transform.TransformDirection(Vector3.down), out trackHit);
+        Debug.DrawRay(shipTransform.position, shipTransform.transform.TransformDirection(Vector3.down), Color.yellow);
+        if (!RayHitsGround)
         {
+            Debug.Log("La nave" + ShipNumber + "se ha salido");
             //Aqui hay que hacer que vuelva hacia atrás en la pista.
+            m_Instance.GetComponent<IAMovement>().CrashOrOut();
         }
 
     }
