@@ -1,10 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour {
 
     public float m_Speed = 100f;                 // How fast the tank moves forward and back.
     public float m_TurnSpeed = 180f;            // How fast the tank turns in degrees per second.
+    public Slider fuelSlider;
+    public Slider velocitySlider;
 
     private float fuel = 100f;
     private string m_MovementAxisName;          // The name of the input axis for moving forward and back.
@@ -18,6 +21,11 @@ public class PlayerMovement : MonoBehaviour {
     private void Awake()
     {
         m_Rigidbody = GetComponent<Rigidbody>();
+        fuelSlider = GameObject.Find("fuelSlider").GetComponent<Slider>();
+        velocitySlider = GameObject.Find("velocitySlider").GetComponent<Slider>();
+        velocitySlider.value = 0;
+
+
     }
 
 
@@ -54,14 +62,15 @@ public class PlayerMovement : MonoBehaviour {
         m_TurnInputValue = Input.GetAxis(m_TurnAxisName);
 
         // If space is held down and ship has fuel 
-        if (Input.GetButton("Fire1") && fuel > 0 )
+        if (Input.GetButton("Fire1") && fuel > 0)
         {
-            m_Rigidbody.AddForce(-transform.forward * 20);
+            m_Speed += 2;
             fuel -= 0.5f;
-            Debug.Log(fuel);
+            fuelSlider.value = fuel;
+            velocitySlider.value += 0.2f;
 
         }
-            
+
     }
 
 

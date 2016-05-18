@@ -27,7 +27,7 @@ public class IAMovement : MonoBehaviour {
 	}
 
     public void nextWaypoint(string WP) {
-        if (WP == waypoint.name)
+        if (WP == waypoint.name) //me aseguro de que está en el waypoint al que le toca ir
         {
             if (waypoint.name == "WayPoint16")
             {
