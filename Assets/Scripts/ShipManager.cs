@@ -18,6 +18,15 @@ public class ShipManager  {
     private RaycastHit trackHit;
     private Transform shipTransform;
 
+    [HideInInspector]
+    public int lap = 0;
+    [HideInInspector]
+    public int cp = 0;
+    [HideInInspector]
+    public int distanceNextCP = 0;
+
+
+
     void Awake()
     {
         shipTransform = m_Instance.transform;
@@ -38,12 +47,13 @@ public class ShipManager  {
             // ... set their material color to the color specific to this tank.
             renderers[i].material.color = ShipColor;
         }
-
         //Debug.Log("TEST: Se ejecuta el SETUP del shipManager");
-
     }
-    
-    // Update is called once per frame
+
+    private void UpdateDistanceNextCP() {
+        distanceNextCP = (int) Vector3.Distance(m_Instance.transform.position, GameObject.Find("CP0" + cp).transform.position);
+    }
+
     public void UpdateCrashOrOut()
     {
         shipTransform = m_Instance.transform;
@@ -67,6 +77,4 @@ public class ShipManager  {
         m_Instance.SetActive(false);
         m_Instance.SetActive(true);
     }
-
-
 }
