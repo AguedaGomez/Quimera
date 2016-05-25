@@ -15,7 +15,6 @@ public class ThirdPersonCamera : MonoBehaviour {
 
         target = GameObject.FindGameObjectWithTag("Player").transform;
 
-
         Vector3 wantedPosition = target.TransformPoint(0, height, distance);
         transform.position = Vector3.Lerp(transform.position, wantedPosition, Time.deltaTime * damping);
 

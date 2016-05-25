@@ -4,28 +4,44 @@ using System.Collections;
 public class IAMovement : MonoBehaviour {
 
     private GameObject waypoint;
-    //private NavMeshAgent nav;
+    private GameObject player;
     private Vector3 shipPosition;
-    public Vector3 speed;
+    private Vector3 vectorRef;
+    public float speed;
+    public int myPosInRace;
+    public int playerPosInRace;
 
 	// Use this for initialization
 	void Awake () {
 
         waypoint = GameObject.Find(nextWP("WayPoint000"));
-        //nav = GetComponent<NavMeshAgent>();
-        speed = Vector3.one;
+        vectorRef = Vector3.one;
+        speed = 120f;
     }
 	
 	// Update is called once per frame
 	void Update () {
-
-        shipPosition = this.transform.position;
-        this.transform.position = Vector3.SmoothDamp(shipPosition, waypoint.transform.position, ref speed , 0.1f, 150f);
-
-        //nav.SetDestination(waypoint.transform.position); Esto va muuy mal
-        
-
+        speed = 120f;
+        Move();
 	}
+
+    private void Move() {
+        float myPos = myPosInRace;
+        float playerPos = playerPosInRace;
+        player = GameObject.FindGameObjectWithTag("Player");
+        speed += player.GetComponent<PlayerMovement>().m_Speed / 3; // añadirle un poco de la velocidad del player para que no se queden muy atras si voy muy rápido.
+
+        if (myPosInRace > playerPosInRace) // si voy por delante del player
+        {
+            speed = Mathf.Abs( speed * (1.0f - ((myPos - playerPos)/10))); // voy ligeramente mas despacio
+        }
+        else { // si voy por detras
+            speed = speed * (1.0f + ((playerPos - myPos)/10)); // voy ligeramente mas rapido
+        }
+        shipPosition = this.transform.position;
+        this.transform.position = Vector3.SmoothDamp(shipPosition, waypoint.transform.position, ref vectorRef, 0.1f, speed);
+
+    }
 
     public void nextWaypoint(string WP) {
         if (waypoint.name == WP)
@@ -76,7 +92,7 @@ public class IAMovement : MonoBehaviour {
         return devolucion;
     }
 
-    private string previousWP(string WPname)
+    public static string previousWP(string WPname)
     {
         char[] letters = WPname.ToCharArray();
         int decenas = (int)char.GetNumericValue(letters[9]);
@@ -98,7 +114,6 @@ public class IAMovement : MonoBehaviour {
         letters[9] = char.Parse(decenas.ToString());
         letters[10] = char.Parse(unidades.ToString());
         string devolucion = new string(letters);
-        //Debug.Log("TEST: PREVIOUS Random WP = " + devolucion);  Funciona
         return devolucion;
     }
 }

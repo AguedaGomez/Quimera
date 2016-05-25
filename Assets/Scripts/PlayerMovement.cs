@@ -4,12 +4,12 @@ using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour {
 
-    public float m_Speed = 100f;                 // How fast the tank moves forward and back.
-    public float m_TurnSpeed = 180f;            // How fast the tank turns in degrees per second.
+    public float m_Speed = 60f;                 // How fast the tank moves forward and back.
+    public float m_TurnSpeed = 150f;            // How fast the tank turns in degrees per second.
     public Slider fuelSlider;
     public Slider velocitySlider;
 
-    private float fuel = 100f;
+    public float fuel = 100f;
     private string m_MovementAxisName;          // The name of the input axis for moving forward and back.
     private string m_TurnAxisName;              // The name of the input axis for turning.
     private Rigidbody m_Rigidbody;              // Reference used to move the tank.
@@ -23,9 +23,7 @@ public class PlayerMovement : MonoBehaviour {
         m_Rigidbody = GetComponent<Rigidbody>();
         fuelSlider = GameObject.Find("fuelSlider").GetComponent<Slider>();
         velocitySlider = GameObject.Find("velocitySlider").GetComponent<Slider>();
-        velocitySlider.value = 0;
-
-
+        velocitySlider.value = m_Speed/5;
     }
 
 
@@ -66,10 +64,9 @@ public class PlayerMovement : MonoBehaviour {
         {
             m_Speed += 2;
             fuel -= 0.5f;
-            fuelSlider.value = fuel;
             velocitySlider.value += 0.2f;
-
         }
+        fuelSlider.value = fuel;
 
     }
 
@@ -84,7 +81,7 @@ public class PlayerMovement : MonoBehaviour {
     private void Move()
     {
         // Create a vector in the direction the tank is facing with a magnitude based on the input, speed and the time between frames.
-        Vector3 movement = transform.forward * m_MovementInputValue * m_Speed * Time.deltaTime;
+        Vector3 movement = transform.forward * m_Speed * Time.deltaTime;
 
         // Apply this movement to the rigidbody's position.
         m_Rigidbody.MovePosition(m_Rigidbody.position - movement);
@@ -102,4 +99,19 @@ public class PlayerMovement : MonoBehaviour {
         // Apply this rotation to the rigidbody's rotation.
         m_Rigidbody.MoveRotation(m_Rigidbody.rotation * turnRotation);
     }
+
+    public void CrashOrOut()
+    {
+        int prevCP = this.GetComponent<ShipPositionManager>().cp;
+        this.transform.rotation = GameObject.Find("CP0" + prevCP).transform.rotation;
+        this.transform.position = GameObject.Find("CP0" + prevCP).transform.position;
+        m_Speed = m_Speed / 1.5f;
+        velocitySlider.value = velocitySlider.value / 1.5f;     
+    }
+
+    public void IncreaseSpeed() {
+        m_Speed += (( m_Speed * Time.fixedDeltaTime)/3);
+        velocitySlider.value +=  ((velocitySlider.value * Time.fixedDeltaTime)/3);
+    }
+
 }

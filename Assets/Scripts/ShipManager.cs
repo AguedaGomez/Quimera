@@ -18,15 +18,7 @@ public class ShipManager  {
     private RaycastHit trackHit;
     private Transform shipTransform;
 
-    [HideInInspector]
-    public int lap = 0;
-    [HideInInspector]
-    public int cp = 0;
-    [HideInInspector]
-    public int distanceNextCP = 0;
-
-
-
+    
     void Awake()
     {
         shipTransform = m_Instance.transform;
@@ -50,21 +42,25 @@ public class ShipManager  {
         //Debug.Log("TEST: Se ejecuta el SETUP del shipManager");
     }
 
-    private void UpdateDistanceNextCP() {
-        distanceNextCP = (int) Vector3.Distance(m_Instance.transform.position, GameObject.Find("CP0" + cp).transform.position);
-    }
+
 
     public void UpdateCrashOrOut()
     {
         shipTransform = m_Instance.transform;
         //Raycast hacia el suelo para ver si te sales de la pista.
         bool RayHitsGround = Physics.Raycast(shipTransform.position, shipTransform.transform.TransformDirection(Vector3.down), out trackHit);
-        Debug.DrawRay(shipTransform.position, shipTransform.transform.TransformDirection(Vector3.down), Color.yellow);
+        //Debug.DrawRay(shipTransform.position, shipTransform.transform.TransformDirection(Vector3.down), Color.yellow);
         if (!RayHitsGround)
         {
-            Debug.Log("La nave" + ShipNumber + "se ha salido");
+            //Debug.Log("La nave" + ShipNumber + "se ha salido");
             //Aqui hay que hacer que vuelva hacia atrás en la pista.
-            m_Instance.GetComponent<IAMovement>().CrashOrOut();
+            if (m_Instance.GetComponent<IAMovement>() != null) // si el gameobject es un Bot, si no, es el jugador.
+            {
+                m_Instance.GetComponent<IAMovement>().CrashOrOut();
+            }
+            else { 
+                m_Instance.GetComponent<PlayerMovement>().CrashOrOut();
+            }
         }
 
     }
@@ -77,4 +73,27 @@ public class ShipManager  {
         m_Instance.SetActive(false);
         m_Instance.SetActive(true);
     }
+
+    public void FreezeShip() {
+        if (m_Instance.GetComponent<IAMovement>() != null) // si el gameobject es un Bot, si no, es el jugador.
+        {
+            m_Instance.GetComponent<IAMovement>().enabled = false;
+        }
+        else
+        {
+            m_Instance.GetComponent<PlayerMovement>().enabled = false;
+        }
+    }
+
+    public void UnFreezeShip() {
+        if (m_Instance.GetComponent<IAMovement>() != null) // si el gameobject es un Bot, si no, es el jugador.
+        {
+            m_Instance.GetComponent<IAMovement>().enabled = true;
+        }
+        else
+        {
+            m_Instance.GetComponent<PlayerMovement>().enabled = true;
+        }
+    }
+
 }
